@@ -61,3 +61,9 @@ int main() {
 // We race among A1 ,A2, A3 ... to get fastest 
 // then we collect all candidates using bfs and do the same operation again
 // We can note that when bulls<=maxGroups we only need one race.
+// 1 2 3 4 5
+// 6 7 8 9 10
+// 11 12 13 14 15
+
+//potential candidates after 1 = 2, 6 
+// after 2 = 3, 7 and after 6 = 11, 7
