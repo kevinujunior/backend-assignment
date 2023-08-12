@@ -9,18 +9,6 @@ bool valid(int bulls, int maxGroup, int i, int j){
 
 int getTopBulls(int bulls, int maxGroup, int k){
     if(bulls<=maxGroup) return 1;
-    vector<vector<int>> curr(maxGroup, vector<int>(maxGroup, 0));
-    int i = 0, j = 0;
-    int total = 1;
-    while(total<=bulls){
-        curr[i][j] = total;
-        if((j+1)%maxGroup==0){ 
-            i++; 
-            j=0;
-        }
-        else j++;
-        total++;
-    }
     int races = 1+(bulls+maxGroup-1)/maxGroup;
     queue<pair<int,int>> q;
     q.push({0,0});
@@ -32,11 +20,11 @@ int getTopBulls(int bulls, int maxGroup, int k){
         while(sz--){
             auto coord = q.front(); q.pop();
             int i = coord.first, j = coord.second;
-            if(valid(bulls, maxGroup, i+1,j) && !vis[i+1][j] && curr[i+1][j]!=0) {            
+            if(valid(bulls, maxGroup, i+1,j) && !vis[i+1][j] && (i+1)*maxGroup+j<bulls) {            
                 q.push({i+1,j});
                 vis[i+1][j] = 1;
             }
-            if(valid(bulls, maxGroup, i,j+1) && !vis[i][j+1] &&  curr[i][j+1]!=0) {
+        if(valid(bulls, maxGroup, i,j+1) && !vis[i][j+1] &&  (i)*maxGroup+(j+1)<bulls) {
                 q.push({i,j+1});
                 vis[i][j+1] = 1;
             }
